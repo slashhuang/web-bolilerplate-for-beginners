@@ -50,8 +50,7 @@ export default function createStore(reducer, initialState, enhancer) {
     }
 
     /**
-     * 每次dispatch都会执行state的观察者
-     * 将观察者添加进nextListeners数组
+     * state观察者添加进nextListeners数组
      * 返回unsubscribe函数取消监听(很好的设计思路!!!!)
      */
     function subscribe(listener) {
@@ -76,12 +75,14 @@ export default function createStore(reducer, initialState, enhancer) {
     /**
      * 唯一改变state的接口
      * 生成nextState同时通知观察者
+     * 每次dispatch都会执行state的观察者
      *
      * return action这样设计比较好的一点是方便扩展中间件!!!
-     *
-     **
      */
     function dispatch(action) {
+        /**
+         * 错误处理，可以跳过
+         */
         if (!isPlainObject(action)) {
             throw new Error(
                 'Actions must be plain objects. ' +
@@ -119,14 +120,8 @@ export default function createStore(reducer, initialState, enhancer) {
     }
 
     /**
-     * Replaces the reducer currently used by the store to calculate the state.
-     *
-     * You might need this if your app implements code splitting and you want to
-     * load some of the reducers dynamically. You might also need this if you
-     * implement a hot reloading mechanism for Redux.
-     *
-     * @param {Function} nextReducer The reducer for the store to use instead.
-     * @returns {void}
+     * 替换原先reducer的接口
+     * 重新初始化reducers和store
      */
     function replaceReducer(nextReducer) {
         if (typeof nextReducer !== 'function') {
