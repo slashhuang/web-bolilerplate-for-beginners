@@ -1,0 +1,10 @@
+# redux-annotation
+- 对redux源码进行中文标注，分离处理警告和异常的代码
+- 修改后的代码行数在200行左右，更容易阅读
+
+### 使用
+```
+  $ cnpm install
+  $ cnpm install webpack -g
+  $ webpack
+```
