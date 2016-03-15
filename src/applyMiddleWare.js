@@ -2,11 +2,10 @@
  * 创建redux中间件
  */
 export default function applyMiddleware(...middlewares) {
-    //参数和redux的store保持一致
+    //参数和redux的store保持一致，这一块就是所有的函数式API逻辑了
     return (createStore) => (reducer, initialState, enhancer) => {
         var store = createStore(reducer, initialState, enhancer)
         var dispatch = store.dispatch
-        var chain = []
         //传递store的部分API给中间件
         var middlewareAPI = {
             getState: store.getState,
@@ -21,7 +20,7 @@ export default function applyMiddleware(...middlewares) {
              * 不断堆积闭包函数栈
              * @param middleware
              */
-                dispatch = middleware(store)(dispatch)
+                dispatch = middleware(middlewareAPI)(dispatch)
         )
         /**
          * 覆盖原来的dispatch函数

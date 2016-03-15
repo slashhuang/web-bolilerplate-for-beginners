@@ -1403,6 +1403,10 @@
 	 * 返回的函数在执行的时候，会遍历reducers返回结果
 	 *
 	 */
+
+	/**
+	 * 异常处理部分
+	 */
 	function combineReducers(reducers) {
 	    var reducerKeys = Object.keys(reducers);
 	    var finalReducers = {};
@@ -1580,7 +1584,6 @@
 	        return function (reducer, initialState, enhancer) {
 	            var store = createStore(reducer, initialState, enhancer);
 	            var _dispatch = store.dispatch;
-	            var chain = [];
 	            //传递store的部分API给中间件
 	            var middlewareAPI = {
 	                getState: store.getState,
@@ -1598,7 +1601,7 @@
 	                     * 不断堆积闭包函数栈
 	                     * @param middleware
 	                     */
-	                    _dispatch = middleware(store)(_dispatch)
+	                    _dispatch = middleware(middlewareAPI)(_dispatch)
 	                );
 	            });
 	            /**
