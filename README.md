@@ -7,4 +7,5 @@
   $ cnpm install
   $ cnpm install webpack -g
   $ webpack
+  $ cd index.html (查看代码效果)
 ```
