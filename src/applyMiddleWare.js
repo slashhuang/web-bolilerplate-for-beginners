@@ -3,8 +3,7 @@
  */
 export default function applyMiddleware(...middlewares) {
     //参数和redux的store保持一致，这一块就是所有的函数式API逻辑了
-    return (createStore) => (reducer, initialState, enhancer) => {
-        var store = createStore(reducer, initialState, enhancer)
+    return (store) => {
         var dispatch = store.dispatch
         //传递store的部分API给中间件
         var middlewareAPI = {
@@ -27,7 +26,7 @@ export default function applyMiddleware(...middlewares) {
          */
         return Object.assign({},
             store,{
-            dispatch
-        })
+                dispatch
+            })
     }
 }

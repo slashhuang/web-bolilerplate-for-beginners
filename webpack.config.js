@@ -5,8 +5,8 @@
 var path =require('path');
 module.exports = {
     entry: {
-        store:"./store.js",
-        test:"./test.js"},
+        example:"./example/example.js"
+    },
     output: {
         path: path.join(__dirname,'dist'),
         filename: "[name].js"

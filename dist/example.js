@@ -68,43 +68,56 @@
 	 * middleware
 	 */
 	var logger = function logger(store) {
-	        return function (next) {
-	                return function (action) {
-	                        console.group(action.type);
-	                        console.info('dispatching', action);
-	                        var result = next(action);
-	                        console.log('next state', store.getState());
-	                        console.groupEnd(action.type);
-	                        //return result
-	                };
-	        };
+	  return function (next) {
+	    return function (action) {
+	      console.group(action.type);
+	      console.info('dispatching', action);
+	      var result = next(action);
+	      console.log('next state', store.getState());
+	      console.groupEnd(action.type);
+	      //return result
+	    };
+	  };
 	};
 	var logger1 = function logger1(store) {
-	        return function (next) {
-	                return function (action) {
-	                        console.group(action.type);
-	                        console.info('logger1', action);
-	                        var result = next(action);
-	                        console.log('next state', store.getState());
-	                        console.groupEnd(action.type);
-	                        //return result
-	                };
-	        };
+	  return function (next) {
+	    return function (action) {
+	      console.group(action.type);
+	      console.info('logger1', action);
+	      var result = next(action);
+	      console.log('next state', store.getState());
+	      console.groupEnd(action.type);
+	      //return result
+	    };
+	  };
 	};
+	/**
+	 * 引入改写过的store
+	 */
 
-	var createStoreWithMiddleware = (0, _index.applyMiddleware)(logger, logger1)(_index.createStore);
-	var store = createStoreWithMiddleware(_reducers2.default);
+	/**
+	 * 所有接口放在src/index.js
+	 */
 
-	// 监听 state 更新时，打印日志
-	// 注意 subscribe() 返回一个函数用来注销监听器
+
+	var createStoreWithMiddleware = (0, _index.applyMiddleware)(logger, logger1)((0, _index.createStore)(_reducers2.default));
+	var store = createStoreWithMiddleware;
+
+	/**
+	 * 监听 state 更新时，打印日志
+	 *
+	 * 注意 subscribe() 返回一个函数用来注销监听器
+	 */
 	var unsubscribe = store.subscribe(function () {
-	        return document.body.innerHTML += JSON.stringify(store.getState());
+	  return document.body.innerHTML += JSON.stringify(store.getState());
 	});
 	var unsubscribe1 = store.subscribe(function () {
-	        return document.body.innerHTML += 'fuckfuckfuck';
+	  return document.body.innerHTML += 'subscribing';
 	});
 
-	// 发起一系列 action
+	/**
+	 * 发起一系列 action
+	 */
 	store.dispatch((0, _actions.addTodo)('Learn about actions'));
 	store.dispatch((0, _actions.addTodo)('Learn about reducers'));
 	store.dispatch((0, _actions.addTodo)('Learn about store'));
@@ -1140,8 +1153,7 @@
 	    }
 
 	    /**
-	     * 每次dispatch都会执行state的观察者
-	     * 将观察者添加进nextListeners数组
+	     * state观察者添加进nextListeners数组
 	     * 返回unsubscribe函数取消监听(很好的设计思路!!!!)
 	     */
 	    function subscribe(listener) {
@@ -1166,12 +1178,14 @@
 	    /**
 	     * 唯一改变state的接口
 	     * 生成nextState同时通知观察者
+	     * 每次dispatch都会执行state的观察者
 	     *
 	     * return action这样设计比较好的一点是方便扩展中间件!!!
-	     *
-	     **
 	     */
 	    function dispatch(action) {
+	        /**
+	         * 错误处理，可以跳过
+	         */
 	        if (!(0, _isPlainObject2.default)(action)) {
 	            throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
 	        }
@@ -1203,14 +1217,8 @@
 	    }
 
 	    /**
-	     * Replaces the reducer currently used by the store to calculate the state.
-	     *
-	     * You might need this if your app implements code splitting and you want to
-	     * load some of the reducers dynamically. You might also need this if you
-	     * implement a hot reloading mechanism for Redux.
-	     *
-	     * @param {Function} nextReducer The reducer for the store to use instead.
-	     * @returns {void}
+	     * 替换原先reducer的接口
+	     * 重新初始化reducers和store
 	     */
 	    function replaceReducer(nextReducer) {
 	        if (typeof nextReducer !== 'function') {
@@ -1410,6 +1418,7 @@
 	function combineReducers(reducers) {
 	    var reducerKeys = Object.keys(reducers);
 	    var finalReducers = {};
+	    //提取reducers中value值为function的部分
 	    for (var i = 0; i < reducerKeys.length; i++) {
 	        var key = reducerKeys[i];
 	        if (typeof reducers[key] === 'function') {
@@ -1579,38 +1588,35 @@
 	        middlewares[_key] = arguments[_key];
 	    }
 
-	    //参数和redux的store保持一致
-	    return function (createStore) {
-	        return function (reducer, initialState, enhancer) {
-	            var store = createStore(reducer, initialState, enhancer);
-	            var _dispatch = store.dispatch;
-	            //传递store的部分API给中间件
-	            var middlewareAPI = {
-	                getState: store.getState,
-	                dispatch: function dispatch(action) {
-	                    return _dispatch(action);
-	                }
-	            };
-	            //这种方式可以让类似arguments数组拥有数组的所有方法，ES6的妙用!!
-	            /**
-	             * 整个中间件的实现目的是不断修正dispatch
-	             */
-	            middlewares.forEach(function (middleware) {
-	                return(
-	                    /**
-	                     * 不断堆积闭包函数栈
-	                     * @param middleware
-	                     */
-	                    _dispatch = middleware(middlewareAPI)(_dispatch)
-	                );
-	            });
-	            /**
-	             * 覆盖原来的dispatch函数
-	             */
-	            return Object.assign({}, store, {
-	                dispatch: _dispatch
-	            });
+	    //参数和redux的store保持一致，这一块就是所有的函数式API逻辑了
+	    return function (store) {
+	        var _dispatch = store.dispatch;
+	        //传递store的部分API给中间件
+	        var middlewareAPI = {
+	            getState: store.getState,
+	            dispatch: function dispatch(action) {
+	                return _dispatch(action);
+	            }
 	        };
+	        //这种方式可以让类似arguments数组拥有数组的所有方法，ES6的妙用!!
+	        /**
+	         * 整个中间件的实现目的是不断修正dispatch
+	         */
+	        middlewares.forEach(function (middleware) {
+	            return(
+	                /**
+	                 * 不断堆积闭包函数栈
+	                 * @param middleware
+	                 */
+	                _dispatch = middleware(middlewareAPI)(_dispatch)
+	            );
+	        });
+	        /**
+	         * 覆盖原来的dispatch函数
+	         */
+	        return Object.assign({}, store, {
+	            dispatch: _dispatch
+	        });
 	    };
 	}
 

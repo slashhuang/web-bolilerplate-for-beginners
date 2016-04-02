@@ -18,6 +18,7 @@ import {getUndefinedStateErrorMessage,getUnexpectedStateShapeWarningMessage,asse
 export default function combineReducers(reducers) {
     var reducerKeys = Object.keys(reducers)
     var finalReducers = {}
+    //提取reducers中value值为function的部分
     for (var i = 0; i < reducerKeys.length; i++) {
         var key = reducerKeys[i]
         if (typeof reducers[key] === 'function') {
