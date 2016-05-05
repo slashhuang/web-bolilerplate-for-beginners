@@ -18,7 +18,7 @@ export default function applyMiddleware(...middlewares) {
             /**
              * 不断堆积闭包函数栈,unwrap的过程
              * @param middleware
-             * next=dispatch
+             * next=dispatch=()=>{}
              * next1=()=>{next();doSomething1}
              * next2=()=>{next1();doSomething2}
              * next3=()=>{next2();doSomething3}=====>next3=()=>{dispatch();doSomething1;doSomething2;doSomething3}
