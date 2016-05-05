@@ -66,12 +66,16 @@
 
 	/**
 	 * middleware
+	 * dispatch
+	 * =>function(){}
+	 * =>
 	 */
 	var logger = function logger(store) {
 	  return function (next) {
 	    return function (action) {
 	      console.group(action.type);
 	      console.info('dispatching', action);
+	      debugger;
 	      var result = next(action);
 	      console.log('next state', store.getState());
 	      console.groupEnd(action.type);
@@ -82,6 +86,7 @@
 	var logger1 = function logger1(store) {
 	  return function (next) {
 	    return function (action) {
+	      debugger;
 	      console.group(action.type);
 	      console.info('logger1', action);
 	      var result = next(action);
@@ -91,6 +96,7 @@
 	    };
 	  };
 	};
+	//1
 	/**
 	 * 引入改写过的store
 	 */
@@ -1602,14 +1608,16 @@
 	        /**
 	         * 整个中间件的实现目的是不断修正dispatch
 	         */
-	        middlewares.forEach(function (middleware) {
-	            return(
-	                /**
-	                 * 不断堆积闭包函数栈
-	                 * @param middleware
-	                 */
-	                _dispatch = middleware(middlewareAPI)(_dispatch)
-	            );
+	        middlewares.forEach(function (middleware)
+	        /**
+	         * 不断堆积闭包函数栈
+	         * @param middleware
+	         */
+	        {
+	            "use strict";
+
+	            _dispatch = middleware(middlewareAPI)(_dispatch);
+	            debugger;
 	        });
 	        /**
 	         * 覆盖原来的dispatch函数

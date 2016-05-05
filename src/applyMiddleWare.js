@@ -16,10 +16,20 @@ export default function applyMiddleware(...middlewares) {
          */
         middlewares.forEach(middleware =>
             /**
-             * 不断堆积闭包函数栈
+             * 不断堆积闭包函数栈,unwrap的过程
              * @param middleware
+             * next=dispatch
+             * next1=()=>{next();doSomething1}
+             * next2=()=>{next1();doSomething2}
+             * next3=()=>{next2();doSomething3}=====>next3=()=>{dispatch();doSomething1;doSomething2;doSomething3}
+             *
              */
-                dispatch = middleware(middlewareAPI)(dispatch)
+        {
+            "use strict";
+            dispatch = middleware(middlewareAPI)(dispatch);
+            debugger;
+
+        }
         )
         /**
          * 覆盖原来的dispatch函数

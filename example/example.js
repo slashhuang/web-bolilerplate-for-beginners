@@ -10,23 +10,38 @@
 
 /**
  * middleware
+ * dispatch
+ * =>function(){}
+ * =>
  */
 const logger = store => next => action => {
         console.group(action.type)
-        console.info('dispatching', action)
+        console.info('dispatching', action);
+        debugger;
         let result = next(action)
         console.log('next state', store.getState())
         console.groupEnd(action.type)
         //return result
-}
+};
 const logger1 = store => next => action => {
+        debugger;
         console.group(action.type)
         console.info('logger1', action)
         let result = next(action)
         console.log('next state', store.getState())
         console.groupEnd(action.type)
         //return result
-}
+};
+//var test = function(store){
+//    return (next){
+//        return (action){
+//            //dosomething with store
+//            next(action);
+//
+//        }
+//    }
+//}
+//1
 /**
  * 引入改写过的store
  */
