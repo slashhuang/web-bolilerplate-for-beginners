@@ -14,6 +14,15 @@ function visibilityFilter(state = SHOW_ALL, action) {
             return state;
     }
 }
+function thunk(state, action) {
+    switch (action.type) {
+        case 'thunk':
+            debugger;
+            return action.text;
+        default:
+            return {};
+    }
+}
 
 function todos(state = [], action) {
     switch (action.type) {
@@ -37,7 +46,8 @@ function todos(state = [], action) {
 
 const todoApp = combineReducers({
     visibilityFilter,
-    todos
+    todos,
+    thunk
 });
 
 export default todoApp;

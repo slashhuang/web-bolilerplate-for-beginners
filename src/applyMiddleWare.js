@@ -27,7 +27,6 @@ export default function applyMiddleware(...middlewares) {
         {
             "use strict";
             dispatch = middleware(middlewareAPI)(dispatch);
-            debugger;
 
         }
         )

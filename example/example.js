@@ -17,14 +17,12 @@
 const logger = store => next => action => {
         console.group(action.type)
         console.info('dispatching', action);
-        debugger;
         let result = next(action)
         console.log('next state', store.getState())
         console.groupEnd(action.type)
         //return result
 };
 const logger1 = store => next => action => {
-        debugger;
         console.group(action.type)
         console.info('logger1', action)
         let result = next(action)
@@ -32,6 +30,16 @@ const logger1 = store => next => action => {
         console.groupEnd(action.type)
         //return result
 };
+const thunkMiddleware= store => next => action => {
+        let {dispatch,getState}=store;
+        debugger;
+
+                        if (typeof action == 'function') {
+                                return action(dispatch, getState);
+                        }
+
+                        return next(action);
+                };
 //var test = function(store){
 //    return (next){
 //        return (action){
@@ -47,13 +55,13 @@ const logger1 = store => next => action => {
  */
 
 import todoApp from './reducers';
-import { addTodo, completeTodo, setVisibilityFilter, VisibilityFilters } from './actions';
+import { addTodo, completeTodo, setVisibilityFilter, VisibilityFilters,thunkTest } from './actions';
 /**
  * 所有接口放在src/index.js
  */
 import { createStore, combineReducers, applyMiddleware } from '../src/index.js'
 
-let createStoreWithMiddleware = applyMiddleware(logger,logger1)(createStore(todoApp))
+let createStoreWithMiddleware = applyMiddleware(logger,logger1,thunkMiddleware)(createStore(todoApp))
 let store = createStoreWithMiddleware;
 
 /**
@@ -76,6 +84,7 @@ store.dispatch(addTodo('Learn about reducers'));
 store.dispatch(addTodo('Learn about store'));
 store.dispatch(completeTodo(0));
 store.dispatch(completeTodo(1));
+store.dispatch(thunkTest({type:'thunk',text:'thunk'}));
 //unsubscribe1();
 store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED));
 

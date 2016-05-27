@@ -56,8 +56,11 @@ export default function combineReducers(reducers) {
         for (var i = 0; i < finalReducerKeys.length; i++) {
             var key = finalReducerKeys[i]
             var reducer = finalReducers[key]
-            //每个key都对应着state
-            var previousStateForKey = state[key]
+            /**
+             *将state按照reducer的名字分离
+             * 每个key都对应着state
+             */
+            var previousStateForKey = state[key];
             var nextStateForKey = reducer(previousStateForKey, action)
             if (typeof nextStateForKey === 'undefined') {
                 var errorMessage = getUndefinedStateErrorMessage(key, action)

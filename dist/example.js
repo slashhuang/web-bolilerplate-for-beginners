@@ -75,7 +75,6 @@
 	    return function (action) {
 	      console.group(action.type);
 	      console.info('dispatching', action);
-	      debugger;
 	      var result = next(action);
 	      console.log('next state', store.getState());
 	      console.groupEnd(action.type);
@@ -86,7 +85,6 @@
 	var logger1 = function logger1(store) {
 	  return function (next) {
 	    return function (action) {
-	      debugger;
 	      console.group(action.type);
 	      console.info('logger1', action);
 	      var result = next(action);
@@ -96,6 +94,31 @@
 	    };
 	  };
 	};
+	var thunkMiddleware = function thunkMiddleware(store) {
+	  return function (next) {
+	    return function (action) {
+	      var dispatch = store.dispatch;
+	      var getState = store.getState;
+
+	      debugger;
+
+	      if (typeof action == 'function') {
+	        return action(dispatch, getState);
+	      }
+
+	      return next(action);
+	    };
+	  };
+	};
+	//var test = function(store){
+	//    return (next){
+	//        return (action){
+	//            //dosomething with store
+	//            next(action);
+	//
+	//        }
+	//    }
+	//}
 	//1
 	/**
 	 * 引入改写过的store
@@ -106,7 +129,7 @@
 	 */
 
 
-	var createStoreWithMiddleware = (0, _index.applyMiddleware)(logger, logger1)((0, _index.createStore)(_reducers2.default));
+	var createStoreWithMiddleware = (0, _index.applyMiddleware)(logger, logger1, thunkMiddleware)((0, _index.createStore)(_reducers2.default));
 	var store = createStoreWithMiddleware;
 
 	/**
@@ -129,6 +152,7 @@
 	store.dispatch((0, _actions.addTodo)('Learn about store'));
 	store.dispatch((0, _actions.completeTodo)(0));
 	store.dispatch((0, _actions.completeTodo)(1));
+	store.dispatch((0, _actions.thunkTest)({ type: 'thunk', text: 'thunk' }));
 	//unsubscribe1();
 	store.dispatch((0, _actions.setVisibilityFilter)(_actions.VisibilityFilters.SHOW_COMPLETED));
 
@@ -167,6 +191,15 @@
 	            return state;
 	    }
 	}
+	function thunk(state, action) {
+	    switch (action.type) {
+	        case 'thunk':
+	            debugger;
+	            return action.text;
+	        default:
+	            return {};
+	    }
+	}
 
 	function todos() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
@@ -189,7 +222,8 @@
 
 	var todoApp = (0, _redux.combineReducers)({
 	    visibilityFilter: visibilityFilter,
-	    todos: todos
+	    todos: todos,
+	    thunk: thunk
 	});
 
 	exports.default = todoApp;
@@ -1017,9 +1051,10 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.addTodo = addTodo;
+	exports.thunkTest = thunkTest;
 	exports.completeTodo = completeTodo;
 	exports.setVisibilityFilter = setVisibilityFilter;
 	/**
@@ -1039,9 +1074,9 @@
 	 */
 
 	var VisibilityFilters = exports.VisibilityFilters = {
-	  SHOW_ALL: 'SHOW_ALL',
-	  SHOW_COMPLETED: 'SHOW_COMPLETED',
-	  SHOW_ACTIVE: 'SHOW_ACTIVE'
+	    SHOW_ALL: 'SHOW_ALL',
+	    SHOW_COMPLETED: 'SHOW_COMPLETED',
+	    SHOW_ACTIVE: 'SHOW_ACTIVE'
 	};
 
 	/*
@@ -1049,15 +1084,20 @@
 	 */
 
 	function addTodo(text) {
-	  return { type: ADD_TODO, text: text };
+	    return { type: ADD_TODO, text: text };
+	}
+	function thunkTest(text) {
+	    return function (dispatch) {
+	        dispatch(text);
+	    };
 	}
 
 	function completeTodo(index) {
-	  return { type: COMPLETE_TODO, index: index };
+	    return { type: COMPLETE_TODO, index: index };
 	}
 
 	function setVisibilityFilter(filter) {
-	  return { type: SET_VISIBILITY_FILTER, filter: filter };
+	    return { type: SET_VISIBILITY_FILTER, filter: filter };
 	}
 
 /***/ },
@@ -1610,14 +1650,18 @@
 	         */
 	        middlewares.forEach(function (middleware)
 	        /**
-	         * 不断堆积闭包函数栈
+	         * 不断堆积闭包函数栈,unwrap的过程
 	         * @param middleware
+	         * next=dispatch=()=>{}
+	         * next1=()=>{next();doSomething1}
+	         * next2=()=>{next1();doSomething2}
+	         * next3=()=>{next2();doSomething3}=====>next3=()=>{dispatch();doSomething1;doSomething2;doSomething3}
+	         *
 	         */
 	        {
 	            "use strict";
 
 	            _dispatch = middleware(middlewareAPI)(_dispatch);
-	            debugger;
 	        });
 	        /**
 	         * 覆盖原来的dispatch函数
