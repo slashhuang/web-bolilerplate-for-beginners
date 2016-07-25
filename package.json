@@ -4,7 +4,7 @@
   "description": "little redux",
   "main": "./src/index.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --progress --colors"
+    "start": "./node_modules/.bin/webpack-dev-server --progress --colors --port 8001"
   },
   "keywords": [
     "redux",

@@ -8,6 +8,6 @@
 ```
   $ cnpm install
   $ cnpm install webpack -g
-  $ webpack
-  $ cd example.html (查看代码效果)
+  $ npm start 
+  $ open http://localhost:8001/
 ```

@@ -15,41 +15,25 @@
  * =>
  */
 const logger = store => next => action => {
-        console.group(action.type)
-        console.info('dispatching', action);
+
         let result = next(action)
-        console.log('next state', store.getState())
-        console.groupEnd(action.type)
-        //return result
+
+        return result
 };
 const logger1 = store => next => action => {
-        console.group(action.type)
-        console.info('logger1', action)
         let result = next(action)
-        console.log('next state', store.getState())
-        console.groupEnd(action.type)
-        //return result
+        console.dir(result);
+        return result
 };
 const thunkMiddleware= store => next => action => {
         let {dispatch,getState}=store;
-        debugger;
-
                         if (typeof action == 'function') {
                                 return action(dispatch, getState);
                         }
 
                         return next(action);
                 };
-//var test = function(store){
-//    return (next){
-//        return (action){
-//            //dosomething with store
-//            next(action);
-//
-//        }
-//    }
-//}
-//1
+
 /**
  * 引入改写过的store
  */

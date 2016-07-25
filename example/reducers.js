@@ -17,7 +17,6 @@ function visibilityFilter(state = SHOW_ALL, action) {
 function thunk(state, action) {
     switch (action.type) {
         case 'thunk':
-            debugger;
             return action.text;
         default:
             return {};

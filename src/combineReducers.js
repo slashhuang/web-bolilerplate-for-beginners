@@ -36,7 +36,7 @@ export default function combineReducers(reducers) {
     /**
      * 典型的函数式API，始终保持闭包访问
      */
-    return function combination(state = {}, action) {
+    return function combination(state = {}, action={}) {
         if (sanityError) {
             throw sanityError
         }

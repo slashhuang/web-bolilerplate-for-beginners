@@ -8,6 +8,7 @@ module.exports = {
         example:"./example/example.js"
     },
     output: {
+        publicPath:'/dist/',
         path: path.join(__dirname,'dist'),
         filename: "[name].js"
     },
