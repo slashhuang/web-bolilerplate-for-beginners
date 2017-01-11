@@ -4,8 +4,10 @@
 
 var path =require('path');
 module.exports = {
+    watch:true,
     entry: {
-        example:"./example/example.js"
+        example:"./example/example.js",
+        test:['babel-polyfill',"./test.js"]
     },
     output: {
         publicPath:'/dist/',
@@ -18,7 +20,7 @@ module.exports = {
                 loader: "babel-loader",
                 exclude: /node_modules/,
                 query: {
-                    presets: ['react','es2015','stage-3']
+                    presets: ['react','es2015','stage-0']
                 }
 
             },

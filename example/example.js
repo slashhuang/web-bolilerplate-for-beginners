@@ -14,16 +14,6 @@
  * =>function(){}
  * =>
  */
-var test = async ()=>{
-       var q =  await new Promise(resolve => {
-                    setTimeout(() => {
-                      resolve(10);
-                    }, 2000);
-                  });
-       }());
-       console.log(q)
-};
-test()
 
 const logger = store => next => action => {
 
