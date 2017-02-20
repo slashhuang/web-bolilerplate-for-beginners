@@ -1,13 +1,14 @@
 /**
- * Created by slashhuang on 16/3/8.
+ * Created by slashhuang on 16/2/19.
  */
 
 var path =require('path');
 module.exports = {
     watch:true,
     entry: {
-        example:"./example/example.js",
-        test:['babel-polyfill',"./test.js"]
+        index:"./src/index.js"
+        // 如果你要async await Promise的话，取消这行注释
+        // ,test:['babel-polyfill',"./src/index.js"]
     },
     output: {
         publicPath:'/dist/',

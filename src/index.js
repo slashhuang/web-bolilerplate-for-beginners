@@ -1,12 +1,12 @@
 /**
- * Created by slashhuang on 16/3/15.
+ * Created by slashhuang on 17/2/19.
  */
-import createStore from './createStore'
-import combineReducers from './combineReducers'
-import applyMiddleware from './applyMiddleware'
 
-export {
-    createStore,
-    combineReducers,
-    applyMiddleware
+const hello = "world";
+class Test {
+    hello(){
+        console.log('world')
+    }
 }
+
+console.log(new Test().hello())
