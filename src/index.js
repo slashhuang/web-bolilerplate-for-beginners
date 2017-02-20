@@ -2,11 +2,11 @@
  * Created by slashhuang on 17/2/19.
  */
 
-const hello = "world";
+const world = "world";
 class Test {
     hello(){
-        console.log('world')
+        return `hello ${world}`
     }
 }
 
-console.log(new Test().hello())
+alert(new Test().hello())
