@@ -6,10 +6,12 @@ var path =require('path');
 module.exports = {
     watch:true,
     entry: {
-        index:"./src/index.js"
+        index:"./src/index.js",
+        react:"./src/react.js"
         // 如果你要async await Promise的话，取消这行注释
         // ,test:['babel-polyfill',"./src/index.js"]
     },
+    devtool:'source-map',
     output: {
         publicPath:'/dist/',
         path: path.join(__dirname,'dist'),
@@ -19,7 +21,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js[x]?$/,
-                loader: "babel-loader",
+                loader: "babel",
                 exclude: /node_modules/
             }
         ],
