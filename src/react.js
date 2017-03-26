@@ -4,6 +4,7 @@
  * 17/3/24
  */
 import React,{Component} from 'react';
+//解构赋值
 import {render} from 'react-dom';
 const RootDom= document.getElementById('root')
 /*------step 1--- get started
@@ -12,15 +13,21 @@ const RootDom= document.getElementById('root')
  * ReactDOM.render() is the method which translates JSX into HTML, 
  * and renders it into the specified DOM node.
  */
-render(<h1>hello world</h1>,RootDom)
+//第一个参数是JSX,第二个参数是对应的dom节点  
+// render(<h1 id='1'><div>Hello world</div></h1>,RootDom)
 
 
 /** ----- step 2 ----- Use JavaScript in JSX
  * You could also use JavaScript in JSX. It takes angle brackets (<) as the beginning of HTML syntax,
  * and curly brackets ({) as the beginning of JavaScript syntax.
  */
-
-// render(<div>{['react','饥人谷','学习'].map(name=> <div>Hello, {name}!</div>)}</div>,
+// render(<div>
+// 		{
+// 			['react','饥人谷','学习'].map(function(name){
+// 				return <div>Hello, {name}!</div>
+// 			})
+// 		}
+// 	</div>,
 //        RootDom);
 
 
@@ -29,9 +36,9 @@ render(<h1>hello world</h1>,RootDom)
  * JSX will implicitly concat all members of the array
  */
 
-// var arr = [
+// let arr = [
 //   <h1>Hello world!</h1>,
-//   <h2>React is awesome</h2>,
+//   <h2>React is awesome</h2>
 // ];
 // render(<div>{arr}</div>,RootDom);
 
@@ -42,12 +49,42 @@ render(<h1>hello world</h1>,RootDom)
  * You don't need to call new on the class in order to get an instance, j
  * ust use it as a normal HTML tag.
  */
-// class FirstComponent extends Component{
-//     render(){
-//         return <div>I am a component</div>
-//     }
-//  };
-// render(<FirstComponent />,RootDom);
+ /**
+class FirstComponent extends Component{
+	shouldComponentUpdate(){
+		console.log('shouldComponentUpdate')
+	}
+	componentWillUnmount(){
+		console.log('componentWillUnmount')
+	}
+	componentDidUpdate(){
+		console.log('componentDidUpdate')
+	}
+	componentWillUpdate(){
+		console.log('componentWillUpdate')
+	}
+	componentWillReceiveProps(){
+		console.log('componentWillReceiveProps')
+	}
+	componentWillMount(){
+		console.log('componentWillMount')
+	}
+	componentDidMount (){
+		console.log('componentDidMount')
+	}
+    render(){
+    	console.log('render')
+    	let a = '3/26'
+        return <div>
+           	I am a component
+           		{a}
+            </div>
+    }
+ };
+
+render(<FirstComponent />,RootDom);
+*/
+
 
 
 
@@ -64,20 +101,47 @@ render(<h1>hello world</h1>,RootDom)
 /** ----- step 6 ----- state and props
  * React uses state and props to struct a component model
  */
-// class PropState extends Component{
-//     constructor(){
-//         super();
-//         this.state={a:'I am state'}
-//     }
-//     render(){
-//         return <div>
-//                 {this.state.a}
-//                 {this.props.b}
-//                 {this.props.children}
-//               </div>
-//     }
-//  };
-// render(<PropState b="I am prop">我是个孩子</PropState>,RootDom);
+ //MVVM  ==> model view viewModel
+
+class PropState extends Component{
+    constructor(){
+        super();
+        this.state={a:'I am state'}
+    }
+    click(){
+    	this.setState({
+    		a:'我更新啦 哈哈哈'
+    	})//=> 更新逻辑
+    }
+    //更新
+    render(){
+        return <div onClick={()=>this.click()}>
+                {this.state.a}
+                {this.props.b}
+                {this.props.c}
+              </div>
+    }
+ };
+ class Another extends Component{
+ 	constructor(){
+ 		super();
+ 		this.state={
+ 			prop1 : '我是another的第一个prop'
+ 		};
+ 	}
+    click(){
+    	this.setState({
+			prop1 : '我是another的第而个prop'
+    	})
+    }
+    render(){
+        return <div onClick={()=>this.click()}>
+        			我在another里面啦
+                <PropState b={this.state.prop1} c="hello" />
+              </div>
+    }
+ };
+render(<Another/>,RootDom);
 
 
 

@@ -13,20 +13,23 @@ webpackJsonp([1],[
 	 */
 	
 	var world = "world";
+	//类 ==> prototype constructor
 	
 	var Test = function () {
-	    function Test() {
-	        _classCallCheck(this, Test);
+	  function Test() {
+	    _classCallCheck(this, Test);
+	
+	    this.a = 'a';
+	  }
+	
+	  _createClass(Test, [{
+	    key: "hello",
+	    value: function hello() {
+	      return "hello " + this.a; //模板字符串
 	    }
+	  }]);
 	
-	    _createClass(Test, [{
-	        key: "hello",
-	        value: function hello() {
-	            return "hello " + world;
-	        }
-	    }]);
-	
-	    return Test;
+	  return Test;
 	}();
 	
 	alert(new Test().hello());
