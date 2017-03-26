@@ -1,13 +1,14 @@
 /**
  * Created by slashhuang on 16/2/19.
  */
-
-var path =require('path');
+const webpack = require('webpack');
+const path =require('path');
 module.exports = {
     watch:true,
     entry: {
-        index:"./src/index.js",
-        react:"./src/react.js"
+        index:"./src/ES6.js",
+        react:"./src/react.js",
+        common:['react','react-dom']
         // 如果你要async await Promise的话，取消这行注释
         // ,test:['babel-polyfill',"./src/index.js"]
     },
@@ -17,6 +18,12 @@ module.exports = {
         path: path.join(__dirname,'dist'),
         filename: "[name].js"
     },
+    plugins:[
+        new webpack.optimize.CommonsChunkPlugin({
+            name:'common',
+            minChunks: Infinity,
+        })
+    ],
     module: {
         loaders: [
             {
