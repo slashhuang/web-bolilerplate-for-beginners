@@ -20,8 +20,8 @@ render(<h1>hello world</h1>,RootDom)
  * and curly brackets ({) as the beginning of JavaScript syntax.
  */
 
-render(<div>{['react','饥人谷','学习'].map(name=> <div>Hello, {name}!</div>)}</div>,
-       RootDom);
+// render(<div>{['react','饥人谷','学习'].map(name=> <div>Hello, {name}!</div>)}</div>,
+//        RootDom);
 
 
 /** ----- step 3 ----- Use array in JSX
@@ -29,11 +29,11 @@ render(<div>{['react','饥人谷','学习'].map(name=> <div>Hello, {name}!</div>
  * JSX will implicitly concat all members of the array
  */
 
-var arr = [
-  <h1>Hello world!</h1>,
-  <h2>React is awesome</h2>,
-];
-render(<div>{arr}</div>,RootDom);
+// var arr = [
+//   <h1>Hello world!</h1>,
+//   <h2>React is awesome</h2>,
+// ];
+// render(<div>{arr}</div>,RootDom);
 
 
 /** ----- step 4 ----- Define a component
@@ -42,42 +42,42 @@ render(<div>{arr}</div>,RootDom);
  * You don't need to call new on the class in order to get an instance, j
  * ust use it as a normal HTML tag.
  */
-class FirstComponent extends Component{
-    render(){
-        return <div>I am a component</div>
-    }
- };
-render(<FirstComponent />,RootDom);
+// class FirstComponent extends Component{
+//     render(){
+//         return <div>I am a component</div>
+//     }
+//  };
+// render(<FirstComponent />,RootDom);
 
 
 
 /** ----- step 5 ----- this.props.children
  * React uses this.props.children to access a component's children nodes.
  */
-class ChildComponent extends Component{
-    render(){
-        return <div>{this.props.children}</div>
-    }
- };
-render(<ChildComponent>我是个孩子</ChildComponent>,RootDom);
+// class ChildComponent extends Component{
+//     render(){
+//         return <div>{this.props.children}</div>
+//     }
+//  };
+// render(<ChildComponent>我是个孩子</ChildComponent>,RootDom);
 
 /** ----- step 6 ----- state and props
  * React uses state and props to struct a component model
  */
-class PropState extends Component{
-    constructor(){
-        super();
-        this.state={a:'I am state'}
-    }
-    render(){
-        return <div>
-                {this.state.a}
-                {this.props.b}
-                {this.props.children}
-              </div>
-    }
- };
-render(<PropState b="I am prop">我是个孩子</PropState>,RootDom);
+// class PropState extends Component{
+//     constructor(){
+//         super();
+//         this.state={a:'I am state'}
+//     }
+//     render(){
+//         return <div>
+//                 {this.state.a}
+//                 {this.props.b}
+//                 {this.props.children}
+//               </div>
+//     }
+//  };
+// render(<PropState b="I am prop">我是个孩子</PropState>,RootDom);
 
 
 

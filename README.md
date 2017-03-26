@@ -18,6 +18,8 @@
 
 > 修改src/index.js来测试你的ES6/7语法即可
 
+> 修改src/react.js来测试你的react代码
+
 > 如果你想用更高级的类似async/Promise等等语法，请修改webpack.config.js
 
 ## 页面
