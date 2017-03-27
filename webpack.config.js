@@ -1,17 +1,18 @@
 /**
  * Created by slashhuang on 16/2/19.
  */
+const fs = require('fs');
 const webpack = require('webpack');
 const path =require('path');
+
+const Dir_prefix = path.resolve(__dirname,'src')
 module.exports = {
     watch:true,
-    entry: {
-        index:"./src/ES6.js",
-        react:"./src/react.js",
-        common:['react','react-dom']
-        // 如果你要async await Promise的话，取消这行注释
-        // ,test:['babel-polyfill',"./src/index.js"]
-    },
+    entry: fs.readdirSync(Dir_prefix).reduce((pre,cur)=>{
+               let base = path.basename(cur,'.js');
+               pre[base] = path.resolve(Dir_prefix,cur);
+               return pre
+            },{}),
     devtool:'source-map',
     output: {
         publicPath:'/dist/',
