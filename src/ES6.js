@@ -14,5 +14,23 @@ class Test {
 }
 
 
+// ES6默认为严格模式，。
+// 前端环境箭头函数babel转码的时候，this指向上级
 
-alert(new Test().hello())
+let test1 = function(){
+    console.log(this);
+    return ()=>{
+        console.log(this)
+    }
+};
+//打印{a:1}
+test1.apply({a:1})()
+
+
+
+
+
+
+
+
+// alert(new Test().hello())
