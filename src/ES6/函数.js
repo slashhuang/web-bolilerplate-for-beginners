@@ -1,26 +1,58 @@
 //函数参数的默认值
 
-function log(x, y = 'World') {
-  console.log(x, y);
-}
+// function log(x, y = 'World') {
+//   console.log(x, y);
+// }
 
-log('Hello') // Hello World
+// log('hello')
+
+// // log('Hello') // Hello World
 
 
 //rest参数
-function add(...values) {
-  let sum = 0;
-  for (var val of values) {
-    sum += val;
-  }
-  return sum;
+function add(a,b,...values) {
+  console.log(values)
 }
 
-add(2, 5, 3) // 10
+// add(2, 5, 3) // 10
+
+console.log(5,...[1, 2, 3])
 
 
-//箭头函数
-var f = v => v;
+// //箭头函数 {}
+// var f = v => v;
+// var f1 = v=>{
+// 	console.log(this)
+// }
+var f3 = function(v){
+	//this
+	return v=>{
+		console.log(this);
+	}
+}
+
+// var f4 = function() {
+// 	//this
+// 	return (v=>{
+// 		console.log(this);
+// 	})::{a:1}
+// };
+// f4()()
+// var f2 = function() {
+// 	console.log(this)
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 // 箭头函数有几个使用注意点。
 
 // （1）函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。

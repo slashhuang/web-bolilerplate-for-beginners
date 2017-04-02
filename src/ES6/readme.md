@@ -15,6 +15,7 @@ Stage 3 - Candidate（候选人阶段）
 Stage 4 - Finished（定案阶段
 
 
+
 # ES6 语法测试
 
 - 安装babel命令行

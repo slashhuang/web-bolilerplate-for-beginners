@@ -7,31 +7,32 @@ function* helloWorldGenerator() {
   yield 'hello';
   yield 'world';
   return 'ending';
-}
+};
+
 
 var hw = helloWorldGenerator();
 let a = hw.next();
 let b = hw.next();
 let c = hw.next();
-console.log(a,b,c)
+console.log(a,b,c,d)
 
 
-function* foo(x) {
-  var y = 2 * (yield (x + 1));
-  var z = yield (y / 3);
-  return (x + y + z);
-}
+// function* foo(x) {
+//   var y = 2 * (yield (x + 1));
+//   var z = yield (y / 3);
+//   return (x + y + z);
+// }
 
-var a = foo(5);
-a.next() // Object{value:6, done:false}
-a.next() // Object{value:NaN, done:false}
-a.next() // Object{value:NaN, done:true}
+// var a = foo(5);
+// a.next() // Object{value:6, done:false}
+// a.next() // Object{value:NaN, done:false}
+// a.next() // Object{value:NaN, done:true}
 
 
-//通过next方法的参数，就有办法在 Generator 函数开始运行之后，继续向函数体内部注入值
-var b = foo(5);
-b.next() // { value:6, done:false }
-b.next(12) // { value:8, done:false }
-b.next(13) // { value:42, done:true }
+// //通过next方法的参数，就有办法在 Generator 函数开始运行之后，继续向函数体内部注入值
+// var b = foo(5);
+// b.next() // { value:6, done:false }
+// b.next(12) // { value:8, done:false }
+// b.next(13) // { value:42, done:true }
 
 
