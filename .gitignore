@@ -4,3 +4,5 @@ test.js
 .idea
 dist
 *.log*
+
+lib
