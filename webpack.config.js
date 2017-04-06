@@ -9,8 +9,12 @@ const Dir_prefix = path.resolve(__dirname,'src')
 module.exports = {
     watch:true,
     entry: fs.readdirSync(Dir_prefix).reduce((pre,cur)=>{
-               let base = path.basename(cur,'.js');
-               pre[base] = path.resolve(Dir_prefix,cur);
+                let absPath = path.resolve(Dir_prefix,cur);
+                if(fs.statSync(absPath).isDirectory()){
+                   return pre;
+                }
+               let base = path.basename(absPath,'.js');
+               pre[base] = absPath
                return pre
             },{}),
     devtool:'source-map',
