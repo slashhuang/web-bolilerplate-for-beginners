@@ -8,15 +8,21 @@ const path =require('path');
 const Dir_prefix = path.resolve(__dirname,'src')
 module.exports = {
     watch:true,
-    entry: fs.readdirSync(Dir_prefix).reduce((pre,cur)=>{
+    entry: Object.assign(fs.readdirSync(Dir_prefix).reduce((pre,cur)=>{
                 let absPath = path.resolve(Dir_prefix,cur);
                 if(fs.statSync(absPath).isDirectory()){
+                    if(fs.readdirSync(absPath).filter(name=>{
+                        return name.match('index')
+                    }).length>0){
+                        pre[cur] = path.resolve(Dir_prefix,cur,'index.js');
+                    }   
                    return pre;
                 }
                let base = path.basename(absPath,'.js');
                pre[base] = absPath
                return pre
-            },{}),
+            },{}),{
+        common:['react','react-dom']}),
     devtool:'source-map',
     output: {
         publicPath:'/dist/',
