@@ -2,6 +2,15 @@
 
 //webpack ==> 处理require
 
-import   { f1 }   from './let_const.js';
+import   Hello, { f1 }   from './let_const.js';
 
-let f2 = f1
+import * as Fuck from './let_const'
+
+const ff = require('./let_const');
+
+
+console.log(f1)
+console.log(Hello)
+console.log(Object.keys(Fuck),Fuck.__esModule)
+
+console.log(ff)

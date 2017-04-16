@@ -7,7 +7,6 @@ let a = 0 ;
 for (let i = 0; i < 10; i++) {
 	console.log(i);
 }
-console.log(i)
 
 // //比对
 
@@ -20,6 +19,9 @@ export function f1() {
   }
   console.log(n); // 5
 }
+
+const C= 'C';
+export default {C}
 
 // export f1  ;
 

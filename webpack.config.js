@@ -14,7 +14,7 @@ module.exports = {
                     if(fs.readdirSync(absPath).filter(name=>{
                         return name.match('index')
                     }).length>0){
-                        pre[cur] = path.resolve(Dir_prefix,cur,'index.js');
+                        pre[cur] = path.resolve(absPath,'index.js');
                     }   
                    return pre;
                 }
