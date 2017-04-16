@@ -8,11 +8,11 @@ let redux = require('redux');
  * compose
  * createStore
  */
-// require('./createStore/')
+require('./createStore/')
 // require('./combineReducers/')
 // require('./bindActionCreators/')
 
 
 // require('./compose/')
-require('./applyMiddleware/')
+// require('./applyMiddleware/')
 

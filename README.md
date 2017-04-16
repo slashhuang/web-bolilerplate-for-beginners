@@ -16,9 +16,11 @@
 
 ### 使用方式
 
-> 修改src/index.js来测试你的ES6/7语法即可
+> 修改src/ES6/来测试你的ES6/7语法即可
 
-> 修改src/react.js来测试你的react代码
+> 修改src/react.js来学习react代码
+
+> 修改src/redux/来学习redux代码
 
 > 如果你想用更高级的类似async/Promise等等语法，请修改webpack.config.js
 
