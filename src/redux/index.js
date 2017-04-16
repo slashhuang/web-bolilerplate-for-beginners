@@ -1,13 +1,20 @@
 // import redux from 'redux';
 let redux = require('redux');
 /*
+
  * redux的主要对外api
+ * ------- 中间件流转逻辑
+ *
  * applyMiddleware
+
+ * ------- utility工具
  * bindActionCreators
- * combineReducers
+ * combineReducers  必掌握
  * compose
- * createStore
+ * ------- 最核心的api
+ * createStore 
  */
+
  /*let model = {} 
 	model.a = 'a' 
 	//无序的改变

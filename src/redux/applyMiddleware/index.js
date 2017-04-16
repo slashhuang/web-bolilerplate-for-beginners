@@ -36,7 +36,9 @@ import { createStore,applyMiddleware } from 'redux';
 
   //日志中间件
   //devtool
-  curry 
+  curry 化 ==> 
+  	1. 多参函数转换成单参函数
+  	2. 灵活化闭包
  */
 
 const logger = store => next => action => {
@@ -58,7 +60,7 @@ const thunkMiddleware= store => next => action => {
 let reducer = (preState={},action)=>{
  	return Object.assign(preState,action)
 }
-let store = createStore(reducer,applyMiddleware(logger,thunkMiddleware));
+let store = createStore(reducer,{},applyMiddleware(logger,thunkMiddleware));
 document.addEventListener('click',()=>{
 	store.dispatch({type:"学习bindActionCreators"})
 })
