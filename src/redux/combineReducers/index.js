@@ -7,6 +7,7 @@
 import { createStore,combineReducers } from 'redux';
 
 let reducer = (preState={},action)=>{
+	debugger;
  	return Object.assign(preState,action)
 }
 let reducer1 = (preState={},action)=>{
@@ -14,9 +15,16 @@ let reducer1 = (preState={},action)=>{
 }
 /* 合并reducers
  * 参数
- * combineReducers(reducers)
+ * combineReducers(reducers)  {key:fn,key1:fn2}
  * 返回值
- * function(state,action)
+ * function(state,action) ==> 
+ 			{reducer1(state,action); ==>State1
+ 			reducer2(state,action);} ===> State2 
+ 			 ===> 合并{state1,state2} 
+ 			 ===> {
+ 			 	userList:State1,
+ 			 	userDetail:state2
+ 			 }
  */
 let finalReducer = combineReducers({
 	userList:reducer,

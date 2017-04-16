@@ -7,7 +7,7 @@ import store  from './createStore';
 /*
  * store的数据结构
  * {
-    dispatch,  ====
+    dispatch,  ==== 
     subscribe, 
     getState,  ====
     replaceReducer,
@@ -22,5 +22,15 @@ let listener1 = ()=>{
 let listener2 = ()=>{
 	console.log(`counter=${++counter}--- listener2 called`)
 };
-store.subscribe(listener1)
-store.subscribe(listener2)
+let domListener = ()=>{
+	document.body.innerHTML += JSON.stringify(store.getState())
+};
+
+store.subscribe(listener1) //===> arr.push(listener1) arr.forEach(fn=>fn())
+store.subscribe(listener2) //===> arr.push(listener2)
+store.subscribe(domListener)
+
+
+
+
+

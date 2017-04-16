@@ -15,7 +15,10 @@ import store  from './createStore';
   }
  */
 //redux数据流 action ==> reducer ==> nextState
-store.dispatch({type:'first'});
-console.log(store.getState())
+let counter = 0;
+document.addEventListener('click',()=>{
+	counter++;
+	store.dispatch({type:counter%2==0?'first':"second"});
+})
 store.dispatch({type:'second'});
 console.log(store.getState())
