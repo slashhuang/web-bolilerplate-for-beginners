@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "nodemon ./test",
-    "build": "rm  -rf dist && webpack",
+    "build": "rimraf dist && webpack",
     "start": "anywhere --port 8001   ",
     "server": "opn http://localhost:8080/webpack-dev-server/index.html && webpack-dev-server",
     "ES6": "babel  -w src/ES6 -d  lib/ES6"
@@ -34,6 +34,7 @@
     "node-fetch": "^1.6.3",
     "nodemon": "^1.11.0",
     "opn-cli": "^3.1.0",
+    "rimraf": "^2.6.1",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
