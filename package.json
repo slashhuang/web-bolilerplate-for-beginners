@@ -1,7 +1,7 @@
 {
   "name": "web-boilerplate-for-beginners",
   "version": "1.0.0",
-  "description": "little redux",
+  "description": "web-boilerplate-for-beginners",
   "main": "./src/index.js",
   "scripts": {
     "test": "nodemon ./test",
@@ -12,7 +12,9 @@
   },
   "keywords": [
     "boilerplate",
-    "ES6/7"
+    "ES6/7",
+    "React",
+    "Redux"
   ],
   "author": "slashhuang",
   "license": "ISC",
