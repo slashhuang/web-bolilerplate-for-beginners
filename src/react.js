@@ -3,9 +3,9 @@
  * @Author slashhuang
  * 17/3/24
  */
-import React,{Component} from 'react';
+import React,{Component} from 'react';// ==> multi terminal 
 //解构赋值
-import {render} from 'react-dom';
+import {render} from 'react-dom'; //dom 层面的渲染
 const RootDom= document.getElementById('root')
 /*------step 1--- get started
  * The template syntax in React is called JSX. 
@@ -42,6 +42,13 @@ const RootDom= document.getElementById('root')
 // ];
 // render(<div>{arr}</div>,RootDom);
 
+// const A = (props)=>{
+//     return <div>{props.gender } + {props.name}</div>
+// }
+// props ==> properties  {gender:'male',name:'slashhuang'}
+// render(<A gender='male' name='slashhuang' />,RootDom)
+
+
 
 /** ----- step 4 ----- Define a component
  * a component class, 
@@ -49,41 +56,52 @@ const RootDom= document.getElementById('root')
  * You don't need to call new on the class in order to get an instance, j
  * ust use it as a normal HTML tag.
  */
- /**
-class FirstComponent extends Component{
-	shouldComponentUpdate(){
-		console.log('shouldComponentUpdate')
-	}
-	componentWillUnmount(){
-		console.log('componentWillUnmount')
-	}
-	componentDidUpdate(){
-		console.log('componentDidUpdate')
-	}
-	componentWillUpdate(){
-		console.log('componentWillUpdate')
-	}
-	componentWillReceiveProps(){
-		console.log('componentWillReceiveProps')
-	}
-	componentWillMount(){
-		console.log('componentWillMount')
-	}
-	componentDidMount (){
-		console.log('componentDidMount')
-	}
-    render(){
-    	console.log('render')
-    	let a = '3/26'
-        return <div>
-           	I am a component
-           		{a}
-            </div>
-    }
- };
 
-render(<FirstComponent />,RootDom);
-*/
+// lifecycle ===> 生命周期
+// 组件化 state + props ==> 
+// class FirstComponent extends Component{
+//     constructor(){
+//         super();
+//         this.state={
+//             b:1
+//         }
+//     }
+// 	shouldComponentUpdate(){
+// 		console.log('shouldComponentUpdate')
+// 	}
+// 	componentWillUnmount(){
+// 		console.log('componentWillUnmount')
+// 	}
+// 	componentDidUpdate(){
+// 		console.log('componentDidUpdate')
+// 	}
+// 	componentWillUpdate(){
+// 		console.log('componentWillUpdate')
+// 	}
+// 	componentWillReceiveProps(){
+// 		console.log('componentWillReceiveProps')
+// 	}
+// 	componentWillMount(){
+// 		console.log('componentWillMount')
+// 	}
+// 	componentDidMount (){
+//         this.setState({b:1})
+// 		console.log('componentDidMount')
+// 	}
+//     render(){
+//         debugger;
+//     	console.log('render')
+//     	let a = '3/26'
+//         return <div>
+//            	I am a component
+//            		{a}
+//                 {this.state.b}
+//             </div>
+//     }
+//  };
+
+// render(<FirstComponent />,RootDom);
+
 
 
 
@@ -122,6 +140,7 @@ class PropState extends Component{
               </div>
     }
  };
+ // data==> Another
  class Another extends Component{
  	constructor(){
  		super();
@@ -135,6 +154,7 @@ class PropState extends Component{
     	})
     }
     render(){
+        //inline <input style="">
         return <div onClick={()=>this.click()}>
         			我在another里面啦
                 <PropState b={this.state.prop1} c="hello" />
