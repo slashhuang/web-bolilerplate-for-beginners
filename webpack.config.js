@@ -4,6 +4,8 @@
 const fs = require('fs');
 const webpack = require('webpack');
 const path =require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 
 const Dir_prefix = path.resolve(__dirname,'src')
 module.exports = {
@@ -18,8 +20,10 @@ module.exports = {
                     }   
                    return pre;
                 }
-               let base = path.basename(absPath,'.js');
-               pre[base] = absPath
+                if(path.extname(absPath).match('js') && !absPath.match('test')){
+                    let base = path.basename(absPath,'.js');
+                    pre[base] = absPath
+                }
                return pre
             },{}),{
         common:['react','react-dom']}),
@@ -27,24 +31,42 @@ module.exports = {
     output: {
         publicPath:'/dist/',
         path: path.join(__dirname,'dist'),
-        filename: "[name].js"
+        filename: "[name].js",
+        chunkFilename:'[name].js'
     },
     plugins:[
         new webpack.optimize.CommonsChunkPlugin({
             name:'common',
             minChunks: Infinity,
-        })
+        }),
+        new ExtractTextPlugin({
+                filename: "[name].css",
+                disable: false,
+                // allChunks: true
+            })
     ],
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
     module: {
         loaders: [
             {
                 test: /\.js[x]?$/,
-                loader: "babel",
+                loader: "babel-loader",
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use:{
+                        loader:'css-loader',
+                        options: {
+                           sourceMap: true
+                        }
+                    }
+                })
             }
-        ],
-        resolve: {
-            extensions: ['', '.js', '.jsx']
-        }
+        ]
     }
 };

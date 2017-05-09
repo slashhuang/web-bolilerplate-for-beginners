@@ -3,6 +3,7 @@
  * @Author slashhuang
  * 17/3/24
  */
+ require('./hello.css')
 import React,{Component} from 'react';// ==> multi terminal 
 //解构赋值
 import {render} from 'react-dom'; //dom 层面的渲染
