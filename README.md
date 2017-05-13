@@ -36,6 +36,8 @@
 
  Redux :  修改src/redux/来学习redux代码
 
+ async :  修改src/async/来学习异步编程
+
  async/generator : 如果你想用更高级的类似async/Promise等等语法，请修改webpack.config.js
 
 ## 页面
