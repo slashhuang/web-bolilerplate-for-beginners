@@ -3,6 +3,7 @@
  * built by slashhuang
  * 17/5/10
  * rxjs
+ * realtime[即时通讯 im] + continuency[持续性 stock]
  */
 
 import { Observable } from 'rxjs/Rx'
