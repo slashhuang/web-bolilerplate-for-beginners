@@ -6,12 +6,13 @@
 
  const f = async (val)=>{
  	const await1 = await new Promise((resolve,reject)=>{
- 		resolve(val)
+ 		setTimeout(resolve,1000,val)
  	}).then(val=>{
  		return val+1
  	})
  	console.log(`await value is ==>${await1}`)
  }
- 
+
+//asyc + await ====> generator + 自动执行器 ==> Promise + 语法转换
  f(2)
  f(3)

@@ -5,8 +5,6 @@ const fs = require('fs');
 const webpack = require('webpack');
 const path =require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-
 const Dir_prefix = path.resolve(__dirname,'src')
 module.exports = {
     watch:true,

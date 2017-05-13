@@ -9,3 +9,9 @@
  // require('./setTimeout')
  // require('./mutationObserver')
  require('./rxjs')
+
+ // reactive programming 
+ // functional programming
+ // oop programming
+
+ // netflix

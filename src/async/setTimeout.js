@@ -8,3 +8,5 @@
  process.nextTick(()=>console.log('tick1'))
  setTimeout(console.log,1,'1秒')
  setTimeout(console.log,2,'2秒')
+
+ // ========> [同步代码] pop()[microtask] [macrotask]
