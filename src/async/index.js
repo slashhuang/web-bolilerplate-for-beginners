@@ -7,4 +7,5 @@
  // require('./generator')
  // require('./async_await')
  // require('./setTimeout')
- require('./mutationObserver')
+ // require('./mutationObserver')
+ require('./rxjs')

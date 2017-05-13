@@ -4,6 +4,7 @@
  * 基础的microtask和macrotask
  */
 
+
  const p_1 = new Promise((res,rej)=>{
  	res(1)
  	res(2)
