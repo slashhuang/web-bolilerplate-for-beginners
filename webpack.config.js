@@ -26,7 +26,7 @@ module.exports = {
                 }
                return pre
             },{}),{
-        common:['react','react-dom']}),
+        common:['babel-polyfill','react','react-dom']}),
     devtool:'source-map',
     output: {
         publicPath:'/dist/',
