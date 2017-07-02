@@ -6,8 +6,8 @@
   "scripts": {
     "test": "nodemon ./test",
     "build": "rimraf dist && webpack",
-    "start": "anywhere --port 8001   ",
-    "server": "opn http://localhost:8080/webpack-dev-server/index.html && webpack-dev-server",
+    "server": "anywhere --port 8001   ",
+    "start": "opn http://localhost:8080/webpack-dev-server/index.html && webpack-dev-server",
     "ES6": "babel  -w src/ES6 -d  lib/ES6"
   },
   "keywords": [

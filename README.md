@@ -24,7 +24,7 @@
 
 ```bash
   # 采用webpack-dev-server编译代码
-  $ npm run server
+  $ npm start
 
 ```
 

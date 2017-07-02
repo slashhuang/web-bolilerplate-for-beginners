@@ -155,9 +155,10 @@ class PropState extends Component{
     }
     render(){
         //inline <input style="">
+        let compo = <PropState b={this.state.prop1} c="hello" />;
         return <div onClick={()=>this.click()}>
         			我在another里面啦
-                <PropState b={this.state.prop1} c="hello" />
+               { compo }
               </div>
     }
  };
