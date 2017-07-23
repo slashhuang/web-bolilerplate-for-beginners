@@ -1,6 +1,3 @@
-
-
-
 // 一是，function关键字与函数名之间有一个星号；
 // 二是，函数体内部使用yield语句，定义不同的内部状态（yield在英语里的意思就是“产出”）。
 function* helloWorldGenerator() {
@@ -8,8 +5,6 @@ function* helloWorldGenerator() {
   yield 'world';
   return 'ending';
 };
-
-
 var hw = helloWorldGenerator();
 let a = hw.next();
 let b = hw.next();
@@ -17,11 +12,11 @@ let c = hw.next();
 console.log(a,b,c,d)
 
 
-// function* foo(x) {
-//   var y = 2 * (yield (x + 1));
-//   var z = yield (y / 3);
-//   return (x + y + z);
-// }
+function* foo(x) {
+  var y = 2 * (yield (x + 1));
+  var z = yield (y / 3);
+  return (x + y + z);
+}
 
 // var a = foo(5);
 // a.next() // Object{value:6, done:false}

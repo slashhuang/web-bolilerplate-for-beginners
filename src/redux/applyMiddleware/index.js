@@ -4,6 +4,8 @@
  * redux中的applyMiddleware中间件
  */
 import { createStore,applyMiddleware } from 'redux';
+import { batchedSubscribe } from 'redux-batched-subscribe';
+
 /*
  * 中间件 applyMiddleware
  * 参数
@@ -41,28 +43,42 @@ import { createStore,applyMiddleware } from 'redux';
   	2. 灵活化闭包
  */
 
-const logger = store => next => action => {
-	console.log('logger1'+action);
-	console.log(store.getState())
+function compose(...funcs) {
+  if (funcs.length === 0) {
+    return arg => arg
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0]
+  }
+
+  const c =  funcs.reduce((a, b) => {
+    return (...args) => {
+      debugger;
+      return a(b(...args))
+    }
+  })
+  return c
+}
+const logger =  store => next => action => {
+	console.log('logger1'+action)
 	next(action)
 };
-// const logger1 = store => next => action => {
-// 	setTimeout(next,1000,action)
-// };
 const thunkMiddleware= store => next => action => {
 		console.log('thunk',action)
-        let {dispatch,getState}=store;
-        if (typeof action == 'function') {
-                return action(dispatch, getState);
-         }
-        return next(action);
+    return next(action);
 };
-let reducer = (preState={},action)=>{
- 	return Object.assign(preState,action)
-}
-let store = createStore(reducer,{},applyMiddleware(logger,thunkMiddleware));
-document.addEventListener('click',()=>{
-	store.dispatch({type:"学习bindActionCreators"})
-})
+const enhancer = compose(
+  applyMiddleware(logger,thunkMiddleware),
+  batchedSubscribe((notify) => {
+    notify();
+  })
+)
+console.log(enhancer.toString())
+const reducer = (state, action) => state;
+debugger;
+const store = createStore(reducer, {}, enhancer);
+debugger;
+store.dispatch({type:1})
 
 
