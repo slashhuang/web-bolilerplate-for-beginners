@@ -3,7 +3,7 @@
  * 17/4/16
  * redux中的applyMiddleware中间件
  */
-import { createStore,applyMiddleware } from 'redux';
+import { createStore,applyMiddleware,compose } from 'redux';
 import { batchedSubscribe } from 'redux-batched-subscribe';
 
 /*
@@ -42,43 +42,28 @@ import { batchedSubscribe } from 'redux-batched-subscribe';
   	1. 多参函数转换成单参函数
   	2. 灵活化闭包
  */
-
-function compose(...funcs) {
-  if (funcs.length === 0) {
-    return arg => arg
-  }
-
-  if (funcs.length === 1) {
-    return funcs[0]
-  }
-
-  const c =  funcs.reduce((a, b) => {
-    return (...args) => {
-      debugger;
-      return a(b(...args))
+const logger1 = store => next => action => {
+  next(action)
+  return 'logger1'
+};
+const logger2 = store => next => action => {
+  next(action);
+  return 'logger2'
+};
+const thunkMiddleware = store => {
+  let chain = (next) => {
+    return (action) => {
+      next(action);
+      return 'fuck';
     }
-  })
-  return c
+  }
+  return chain;
 }
-const logger =  store => next => action => {
-	console.log('logger1'+action)
-	next(action)
-};
-const thunkMiddleware= store => next => action => {
-		console.log('thunk',action)
-    return next(action);
-};
-const enhancer = compose(
-  applyMiddleware(logger,thunkMiddleware),
-  batchedSubscribe((notify) => {
-    notify();
-  })
-)
-console.log(enhancer.toString())
+debugger;
+const enhancer = applyMiddleware(logger1, logger2, thunkMiddleware);
 const reducer = (state, action) => state;
-debugger;
 const store = createStore(reducer, {}, enhancer);
-debugger;
-store.dispatch({type:1})
+const s = store.dispatch({type:1});
+console.log('return value gets---', s);
 
 
