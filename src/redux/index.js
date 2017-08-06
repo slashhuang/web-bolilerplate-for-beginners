@@ -23,11 +23,11 @@
 	===> model ==> {a:1}
 
  */
-require('./demo');
+// require('./demo');
 // require('./createStore/')
 // require('./combineReducers/')
 // require('./bindActionCreators/')
 
 // require('./compose/')
-// require('./applyMiddleware/')
+require('./applyMiddleware/')
 
