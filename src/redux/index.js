@@ -1,5 +1,3 @@
-// import redux from 'redux';
-let redux = require('redux');
 /*
 
  * redux的主要对外api
@@ -25,10 +23,11 @@ let redux = require('redux');
 	===> model ==> {a:1}
 
  */
+require('./demo');
 // require('./createStore/')
 // require('./combineReducers/')
 // require('./bindActionCreators/')
 
 // require('./compose/')
-require('./applyMiddleware/')
+// require('./applyMiddleware/')
 
