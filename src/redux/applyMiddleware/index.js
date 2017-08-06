@@ -59,7 +59,27 @@ const logger1 = store => next => action => {
 const logger2 = store => next => action=> {
     next(action);
 };
-const enhancer = applyMiddleware(logger1, logger2);
+const logger3 = store => next => action=> {
+    next(action);
+};
+
+
+// return funcs.reduce(function (a, b) {
+//     return function () {
+//       return a(b.apply(undefined, arguments));
+//     };
+//   });
+// a = logger1
+// b = logger2
+
+// a1 = (arg1) => logger1(logger2(arg1))
+// b1 = logger3;
+
+// a2 = (dispatch) => a1(logger3(dispatch))
+
+
+
+const enhancer = applyMiddleware(logger1, logger2, logger3);
 const reducer = (state, action) => state;
 const store = createStore(reducer, {}, enhancer);
 store.dispatch({type:1});
