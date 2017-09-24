@@ -9,7 +9,6 @@ export class Player extends React.PureComponent {
             poster,
             autoPlay: true,
             controls: true,
-            autoBuffer: true,
         };
         return (
             <div>
