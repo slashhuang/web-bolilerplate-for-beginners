@@ -11,9 +11,11 @@ export class Player extends React.PureComponent {
         let videoProps = {
             src,
             poster,
-            autoPlay: false,
+            // autoPlay: true,
             controls: true,
             playsInline: true,
+            // width: '100px',
+            // height: '200px',
         };
         return (
             <div>
@@ -32,3 +34,5 @@ export class Player extends React.PureComponent {
         }
     }
 }
+
+// set get
