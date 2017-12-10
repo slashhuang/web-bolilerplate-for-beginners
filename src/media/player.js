@@ -30,7 +30,7 @@ export class Player extends React.PureComponent {
     }
     forward = () => {
         if (this.videoRef) {
-            this.videoRef.currentTime = this.videoRef.currentTime + 3;
+            this.videoRef.currentTime = this.videoRef.currentTime + 3.11;
         }
     }
 }

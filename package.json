@@ -4,6 +4,7 @@
   "description": "web-boilerplate-for-beginners",
   "main": "./src/index.js",
   "scripts": {
+    "a": "echo \"hello world\"",
     "test": "nodemon ./test",
     "build": "rimraf dist && webpack",
     "server": "anywhere --port 8001   ",
